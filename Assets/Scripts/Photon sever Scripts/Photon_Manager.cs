@@ -92,7 +92,6 @@ public class Photon_Manager : MonoBehaviourPunCallbacks
         Debug.Log("Photon : OnCreatedRoom");
     }
 
-
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
         Debug.Log("Photon : OnCreateRoomFailed returnCode : " + returnCode + ", message : " + message);
