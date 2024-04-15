@@ -16,7 +16,7 @@ public class Player_Manager : MonoBehaviour
     [SerializeField]
     private GameObject aimImage;
     [SerializeField]
-    private GameObject aimObj;
+    //private GameObject aimObj;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,12 +49,12 @@ public class Player_Manager : MonoBehaviour
             {
                 //Debug.Log("Name : " + hit.transform.gameObject.name);
                 targetPositon = hit.point;
-                aimObj.transform.position = hit.point;
+               // aimObj.transform.position = hit.point;
             }
             else
             {
                 targetPositon = camTransform.position + camTransform.forward;
-                aimObj.transform.position = camTransform.position + camTransform.forward;
+                //aimObj.transform.position = camTransform.position + camTransform.forward;
             }
 
             Vector3 targetAim = targetPositon;

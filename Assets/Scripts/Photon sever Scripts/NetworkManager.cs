@@ -6,6 +6,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 {
     private readonly string gameVersion = "v1.0"; // 게임 버전
 
+    public GameObject playerPrefab; // 플레이어 프리팹
+
+   
+
     void Awake()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -31,6 +35,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     void CreatePlayer()
     {
         // "woman" 프리팹을 로드하여 플레이어를 생성합니다.
-        GameObject playerTemp = PhotonNetwork.Instantiate("woman", new Vector3(Random.Range(-10f, 10f), 0, 0), Quaternion.identity);
+
+        GameObject playerTemp = PhotonNetwork.Instantiate("woman", new Vector3(Random.Range(-10f, 10f), 3, 3), Quaternion.identity);
+   
     }
 }
