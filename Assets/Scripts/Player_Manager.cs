@@ -1,4 +1,5 @@
 using Cinemachine;
+using Photon.Pun;
 using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ public class Player_Manager : MonoBehaviour
     private GameObject aimImage;
     [SerializeField]
     private GameObject aimObj;
+    [SerializeField]
+    private PhotonView PV;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,8 +40,10 @@ public class Player_Manager : MonoBehaviour
             aimCam.gameObject.SetActive(true);
             aimImage.SetActive(true);
             controller.isAimMove = true;
-
-            ani.SetLayerWeight(1,1);
+            if (PV.IsMine)
+            {
+                ani.SetLayerWeight(1, 1);
+            }
 
             Vector3 targetPositon = Vector3.zero;
 
@@ -74,8 +79,10 @@ public class Player_Manager : MonoBehaviour
             aimCam.gameObject.SetActive(false);
             aimImage.SetActive(false);
             controller.isAimMove = false;
-
-            ani.SetLayerWeight(1, 0);
+            if (PV.IsMine)
+            {
+                ani.SetLayerWeight(1, 0);
+            }
         }
     }
         

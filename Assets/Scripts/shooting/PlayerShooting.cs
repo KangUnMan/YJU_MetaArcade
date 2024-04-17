@@ -7,7 +7,7 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
 {
     public Transform aimPoint;
     public GameObject bulletPrefab;
-    public float bulletSpeed = 100f;
+    public float bulletSpeed = 50f;
     public ParticleSystem muzzleFlash;
 
     void Update()
@@ -30,7 +30,7 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
     IEnumerator ApplyForceAfterDelay(GameObject bullet, Vector3 aimPointPosition)
     {
         // 일정 시간 대기
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.05f);
 
         // 총알에 힘을 가함
         Vector3 direction = (aimPointPosition - bullet.transform.position).normalized;

@@ -2205,6 +2205,7 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
+  PV: {fileID: 4379092384658066326}
   isAimMove: 0
 --- !u!114 &8325585691712584731
 MonoBehaviour:
@@ -2357,6 +2358,7 @@ MonoBehaviour:
   aimCam: {fileID: 7043730142405223870}
   aimImage: {fileID: 4323305055859223703}
   aimObj: {fileID: 6044910990779668856}
+  PV: {fileID: 4379092384658066326}
 --- !u!114 &4379092384658066326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2878,7 +2880,7 @@ Transform:
   m_GameObject: {fileID: 5308219562176524663}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1911254}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

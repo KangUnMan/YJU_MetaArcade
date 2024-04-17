@@ -1,4 +1,5 @@
-﻿ using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -15,13 +16,13 @@ namespace StarterAssets
     public class ThirdPersonController : MonoBehaviour
     {
         [Header("Player")]
-        [Tooltip("Move speed of the character in m/s")]
+        [Tooltip(" 걷는 속도")]
         public float MoveSpeed = 2.0f;
 
-        [Tooltip("Sprint speed of the character in m/s")]
+        [Tooltip("달리는 속도")]
         public float SprintSpeed = 5.335f;
 
-        [Tooltip("How fast the character turns to face movement direction")]
+        [Tooltip("회전 속도")]
         [Range(0.0f, 0.3f)]
         public float RotationSmoothTime = 0.12f;
 
@@ -33,7 +34,7 @@ namespace StarterAssets
         [Range(0, 1)] public float FootstepAudioVolume = 0.5f;
 
         [Space(10)]
-        [Tooltip("The height the player can jump")]
+        [Tooltip("점프")]
         public float JumpHeight = 1.2f;
 
         [Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
@@ -97,6 +98,9 @@ namespace StarterAssets
         private int _animIDJump;
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
+
+        [SerializeField]
+        private PhotonView PV;
 
 #if ENABLE_INPUT_SYSTEM 
         private PlayerInput _playerInput;
@@ -169,11 +173,15 @@ namespace StarterAssets
 
         private void AssignAnimationIDs()
         {
-            _animIDSpeed = Animator.StringToHash("Speed");
-            _animIDGrounded = Animator.StringToHash("Grounded");
-            _animIDJump = Animator.StringToHash("Jump");
-            _animIDFreeFall = Animator.StringToHash("FreeFall");
-            _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+            if (PV.IsMine)
+            {
+                _animIDSpeed = Animator.StringToHash("Speed");
+                _animIDGrounded = Animator.StringToHash("Grounded");
+                _animIDJump = Animator.StringToHash("Jump");
+                _animIDFreeFall = Animator.StringToHash("FreeFall");
+                _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+            }
+        
         }
 
         private void GroundedCheck()
