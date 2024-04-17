@@ -36,7 +36,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         // "woman" 프리팹을 로드하여 플레이어를 생성합니다.
 
-        GameObject playerTemp = PhotonNetwork.Instantiate("woman", new Vector3(Random.Range(-10f, 10f), 3, 3), Quaternion.identity);
+        GameObject playerTemp = PhotonNetwork.Instantiate("woman", new Vector3(Random.Range(2f, -4f), 3, -7), Quaternion.identity); ;
    
     }
 }

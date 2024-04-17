@@ -45,6 +45,12 @@ public class Player_Manager : MonoBehaviour
             Transform camTransform = Camera.main.transform;
             RaycastHit hit;
 
+            int layerMask = (-1) - (1 << LayerMask.NameToLayer("AimCam"));  // Everything에서 Player 레이어만 제외하고 충돌 체크함
+            Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask);
+
+            int layerMask2 = (-1) - (1 << LayerMask.NameToLayer("Player"));  // Everything에서 Player 레이어만 제외하고 충돌 체크함
+            Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask);
+
             if (Physics.Raycast(camTransform.position, camTransform.forward, out hit, Mathf.Infinity))
             {
                 Debug.Log("Name : " + hit.transform.gameObject.name);

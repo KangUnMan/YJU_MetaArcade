@@ -23,8 +23,18 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
     {
         Vector3 direction = (aimPointPosition - transform.position).normalized;
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-        Rigidbody bulletRB = bullet.GetComponent<Rigidbody>();  
-        bulletRB.velocity = direction * bulletSpeed; //총 발사
+        StartCoroutine(ApplyForceAfterDelay(bullet, aimPointPosition));
         muzzleFlash.Play();
+    }
+
+    IEnumerator ApplyForceAfterDelay(GameObject bullet, Vector3 aimPointPosition)
+    {
+        // 일정 시간 대기
+        yield return new WaitForSeconds(0.1f);
+
+        // 총알에 힘을 가함
+        Vector3 direction = (aimPointPosition - bullet.transform.position).normalized;
+        Rigidbody bulletRB = bullet.GetComponent<Rigidbody>();
+        bulletRB.velocity = direction * bulletSpeed;
     }
 }
