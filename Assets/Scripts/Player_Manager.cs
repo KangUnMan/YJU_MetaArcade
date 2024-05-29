@@ -1,4 +1,5 @@
 using Cinemachine;
+using Photon.Realtime;
 using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
@@ -114,17 +115,17 @@ public class Player_Manager : MonoBehaviour
             transform.rotation = originalRotation;
         }
 
-        if (UnityEngine.Input.GetButton("Fire2") && UnityEngine.Input.GetKey(KeyCode.LeftShift))
-        {
-            scopeCam.fieldOfView = 30;
-            //ani.speed = 0;
-            Debug.Log("쉬프트키다운");
-        }
-        else
-        {
-            scopeCam.fieldOfView = 60;
-            //ani.speed = 1;
-            Debug.Log("쉬프트키업");
-        }
+        //if (UnityEngine.Input.GetButton("Fire2") && UnityEngine.Input.GetKey(KeyCode.LeftShift))
+        //{
+        //    scopeCam.fieldOfView = 30;
+        //    //ani.speed = 0;
+        //    Debug.Log("쉬프트키다운");
+        //}
+        //else
+        //{
+        //    scopeCam.fieldOfView = 60;
+        //    //ani.speed = 1;
+        //    Debug.Log("쉬프트키업");
+        //}
     }
 }

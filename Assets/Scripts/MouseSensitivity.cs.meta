@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:Assets/Scripts/MouseSensitivity.cs.meta
 guid: 213cc2fbea41ce0449038b9e9e6ccaba
+=======
+guid: b8948df3d196375419bb14890e7b8b64
+>>>>>>> Stashed changes:Assets/Scripts/Photon sever Scripts/Photon_Manager.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
