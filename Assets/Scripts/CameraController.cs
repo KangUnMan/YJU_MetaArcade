@@ -24,7 +24,7 @@ public class CameraController : MonoBehaviour
         transform.RotateAround(target.position, Vector3.up, mouseX * rotationSpeed * Time.deltaTime);
         float mouseY = Input.GetAxis("Mouse Y");
         verticalRotation -= mouseY * rotationSpeed * Time.deltaTime;
-        verticalRotation = Mathf.Clamp(verticalRotation, -80f, 80f);
+        verticalRotation = Mathf.Clamp(verticalRotation, -3f, 3f);
         transform.rotation = Quaternion.Euler(verticalRotation, target.eulerAngles.y, 0f);
 
     }

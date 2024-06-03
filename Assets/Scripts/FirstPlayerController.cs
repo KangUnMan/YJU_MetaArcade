@@ -10,7 +10,17 @@ public class FirstPlayerController : MonoBehaviour
     public float maxVerticalAngle = 80f; // 플레이어가 볼 수 있는 최대 상단 각도
     public float minVerticalAngle = -80f; // 플레이어가 볼 수 있는 최대 하단 각도
 
+    private CharacterController controller; // CharacterController 참조
     private float verticalRotation = 0f; // 수직 회전 각도
+
+    void Start()
+    {
+        // CharacterController 컴포넌트 참조 가져오기
+        controller = GetComponent<CharacterController>();
+
+        // 초기화할 때 충돌 감지 활성화
+        controller.detectCollisions = true;
+    }
 
     void Update()
     {
@@ -35,6 +45,7 @@ public class FirstPlayerController : MonoBehaviour
 
         // 이동
         float forwardInput = Input.GetAxis("Vertical");
-        transform.Translate(Vector3.forward * forwardInput * moveSpeed * Time.deltaTime);
+        Vector3 moveDirection = transform.forward * forwardInput * moveSpeed * Time.deltaTime;
+        controller.Move(moveDirection);
     }
 }
