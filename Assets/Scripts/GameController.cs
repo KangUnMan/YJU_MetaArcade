@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,11 @@ public class GameController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            StartCoroutine(StartGameAfterDelay(5.0f));
+
+        }
         if (other.CompareTag("Player"))
         {
             Gun.SetActive(true);

@@ -94,24 +94,27 @@ public class Player_Manager : MonoBehaviour
         if (UnityEngine.Input.GetButtonDown("Fire2"))
         {
             //fpcScript.enabled = true;
+            
             scopeCam.gameObject.SetActive(true);
             PlayerCam.gameObject.SetActive(false);
             //controller.isAimMove = true;
             controller.enabled = false;
             //tfc.enabled = true;
             fpc.enabled = true;
-            ani.SetLayerWeight(1,1);
+            ani.SetLayerWeight(1, 1);
+
         }
         else if (UnityEngine.Input.GetButtonUp("Fire2"))
         {
             //fpcScript.enabled = false;
+            
             scopeCam.gameObject.SetActive(false);
             PlayerCam.gameObject.SetActive(true);
             //controller.isAimMove = false;
             controller.enabled = true;
             //tfc.enabled = false;
             fpc.enabled = false;
-            ani.SetLayerWeight(1, 0);
+            
             transform.rotation = originalRotation;
         }
 
