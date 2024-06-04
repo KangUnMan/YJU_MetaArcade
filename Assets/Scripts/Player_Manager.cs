@@ -37,6 +37,7 @@ public class Player_Manager : MonoBehaviour
         ani = GetComponent<Animator>();
         fpc = GetComponent<FirstPlayerController>();
         originalRotation = transform.rotation;
+        ani.SetLayerWeight(1, 0);
         //tfc = GetComponent<TransformController>();
     }
 
@@ -114,7 +115,7 @@ public class Player_Manager : MonoBehaviour
             controller.enabled = true;
             //tfc.enabled = false;
             fpc.enabled = false;
-            
+            ani.SetLayerWeight(1, 0);
             transform.rotation = originalRotation;
         }
 
