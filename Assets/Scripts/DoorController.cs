@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
+    private bool isFKeyPressed = false;
+    private bool isCursorOverObject = false;
     public Animator doorAnimator;
     private bool isopen = false;
     // Start is called before the first frame update
@@ -13,6 +15,7 @@ public class DoorController : MonoBehaviour
         {
             if (isopen)
             {
+                
                 CloseDoor();
             }
         }
@@ -24,7 +27,13 @@ public class DoorController : MonoBehaviour
         {
             if (!isopen)
             {
-                OpenDoor();
+                if (isFKeyPressed)
+                {
+
+
+                    OpenDoor();
+                    
+                }
             }
         }
     }
@@ -54,5 +63,12 @@ public class DoorController : MonoBehaviour
         doorAnimator.SetBool("isopen", false);
         isopen = false;
     }
-
+    void OnGUI()
+    {
+        Event e = Event.current;
+        if (isCursorOverObject && e.isKey && e.keyCode == KeyCode.F)
+        {
+            isFKeyPressed = true;
+        }
+    }
 }
