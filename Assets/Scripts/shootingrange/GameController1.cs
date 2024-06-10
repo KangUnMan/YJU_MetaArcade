@@ -5,17 +5,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro; 
 
-public class GameController : MonoBehaviour
+public class GameController1 : MonoBehaviour
 {
-
-
-    public bool BtnActive = false;
+    private bool isFKeyPressed = false;
     private bool isCursorOverObject = false;
     public Text CountDownText;
     public GameObject Gun;
     private RandomObjectDisplay _randomObjectDisplay;
     public TextMeshProUGUI a;
-
 
     private void Start()
     {
@@ -27,19 +24,17 @@ public class GameController : MonoBehaviour
         
         if (other.CompareTag("Player"))
         {
+            if (isFKeyPressed)
+            {
                 Gun.SetActive(true);
                 StartCoroutine(StartGameAfterDelay(5.0f));
-                BtnActive = true;
+            }
+            
         }
 
-       
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        else
         {
             Gun.SetActive(false);
-            BtnActive = false;
         }
     }
 
@@ -62,11 +57,7 @@ public class GameController : MonoBehaviour
         Debug.Log("게임이 시작됩니다.");
         _randomObjectDisplay.enabled=true;
     }
-    private void EndGame()
-    {
-        _randomObjectDisplay.enabled = false;
-    }
-   /* void OnMouseEnter()
+    void OnMouseEnter()
     {
         isCursorOverObject = true;
     }
@@ -76,20 +67,12 @@ public class GameController : MonoBehaviour
     {
         isCursorOverObject = false;
     }
-    /*void OnGUI()
+    void OnGUI()
     {
         Event e = Event.current;
-        if (isCursorOverObject)
+        if (isCursorOverObject && e.isKey && e.keyCode == KeyCode.F)
         {
-            b.SetActive(true);
-            if (isCursorOverObject && e.isKey && e.keyCode == KeyCode.F)
-            {
-                isFKeyPressed = true;
-            }
+            isFKeyPressed = true;
         }
-        else
-        {
-            b.SetActive(false);
-        }
-    }*/
+    }
 }

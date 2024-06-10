@@ -10,10 +10,11 @@ public class RandomObjectDisplay : MonoBehaviour
     private bool isActive = true; // 스크립트 활성화 여부를 나타내는 변수
     private Coroutine displayCoroutine; // 코루틴 참조 변수
 
+
     void Start()
     {
         // 스크립트 시작 시 코루틴을 시작합니다.
-        displayCoroutine = StartCoroutine(ChangeObjectRepeatedly());
+       displayCoroutine = StartCoroutine(ChangeObjectRepeatedly());
     }
 
     IEnumerator ChangeObjectRepeatedly()

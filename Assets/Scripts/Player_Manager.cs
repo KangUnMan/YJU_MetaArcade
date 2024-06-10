@@ -5,9 +5,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Windows;
+using Photon.Pun;
+
 
 public class Player_Manager : MonoBehaviour
 {
+    public GameObject playerPrefab;
     private StarterAssetsInputs input;
     private ThirdPersonController controller;
     private Animator ani;
@@ -39,6 +42,10 @@ public class Player_Manager : MonoBehaviour
         originalRotation = transform.rotation;
         ani.SetLayerWeight(1, 0);
         //tfc = GetComponent<TransformController>();
+        if (PhotonNetwork.IsConnectedAndReady)
+        {
+            PhotonNetwork.Instantiate(playerPrefab.name, Vector3.zero, Quaternion.identity);
+        }
     }
 
     // Update is called once per frame

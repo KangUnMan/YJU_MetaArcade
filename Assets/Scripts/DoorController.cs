@@ -8,6 +8,7 @@ public class DoorController : MonoBehaviour
     private bool isCursorOverObject = false;
     public Animator doorAnimator;
     private bool isopen = false;
+    public GameController GameController;
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
     {
@@ -27,20 +28,19 @@ public class DoorController : MonoBehaviour
         {
             if (!isopen)
             {
-                if (isFKeyPressed)
-                {
+                
 
 
                     OpenDoor();
                     
-                }
+                
             }
         }
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        /*if (Input.GetKeyDown(KeyCode.E))
         {
            if (isopen)
             {
@@ -50,7 +50,7 @@ public class DoorController : MonoBehaviour
             {
                 OpenDoor();
             }
-        }
+        }*/
     }
 
     private void OpenDoor()
