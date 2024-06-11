@@ -8,8 +8,11 @@ using UnityEngine.Windows;
 using Photon.Pun;
 
 
-public class Player_Manager : MonoBehaviour
+public class Player_Manager : MonoBehaviourPunCallbacks
 {
+    public PhotonView Pv;
+    public Rigidbody rb;
+    private Transform tr;
     public GameObject playerPrefab;
     private StarterAssetsInputs input;
     private ThirdPersonController controller;
@@ -35,6 +38,7 @@ public class Player_Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         input = GetComponent<StarterAssetsInputs>();
         controller = GetComponent<ThirdPersonController>();
         ani = GetComponent<Animator>();

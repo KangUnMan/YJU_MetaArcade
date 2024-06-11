@@ -1,6 +1,8 @@
 using Photon.Pun;
 using Photon.Realtime;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
@@ -19,7 +21,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.SerializationRate = 30;
         PhotonNetwork.ConnectUsingSettings();
     }
-
+    public override void OnConnected()
+    {
+        Debug.Log("연결완료");
+    }
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        Debug.Log(cause);
+    }
     public override void OnConnectedToMaster()
     {
         Debug.Log("서버 연결");

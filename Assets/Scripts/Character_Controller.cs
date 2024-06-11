@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Character_Controller : MonoBehaviour
 {
@@ -22,105 +23,119 @@ public class Character_Controller : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        if (GetComponent<PhotonView>().IsMine)
+        {
+
+            this.gameObject.name += "(LocalPlayer)";
+        }
+        else
+        {
+
+            this.gameObject.name += "(OtherPlayer)";
+        }
     }
 
     // Update is called once per frame
     private void LateUpdate()
     {
-        float pos_x = Input.GetAxis("Horizontal");
-        float pos_z = Input.GetAxis("Vertical");
+        if (GetComponent<PhotonView>().IsMine)
+        {
+            float pos_x = Input.GetAxis("Horizontal");
+            float pos_z = Input.GetAxis("Vertical");
 
-        //달리기 ON&OFF
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            m_Animator.SetBool("Run", true);
-        }
-        else
-        {
-            m_Animator.SetBool("Run", false);
-        }
-
-        //걷기 ON&OFF 및 캐릭터 이동
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
-        {
-            Debug.Log(new Vector2(pos_x, pos_z));
-            if (pos_x > 0)
+            //달리기 ON&OFF
+            if (Input.GetKey(KeyCode.LeftShift))
             {
-                if (pos_z > 0)
-                {
-                    obj_Body.transform.localEulerAngles = new Vector3(0f, 45f, 0f);
-                    //transform.Rotate(new Vector3(0f, 45f, 0f));
-                }
-                else if (pos_z < 0)
-                {
-                    obj_Body.transform.localEulerAngles = new Vector3(0f, 135f, 0f);
-                    //transform.Rotate(new Vector3(0f, 135f, 0f));
-                }
-                else
-                {
-                    obj_Body.transform.localEulerAngles = new Vector3(0f, 90f, 0f);
-                    //transform.Rotate(new Vector3(0f, 90f, 0f));
-                }
+                m_Animator.SetBool("Run", true);
             }
-            else if (pos_x < 0)
+            else
             {
-                if (pos_z > 0)
+                m_Animator.SetBool("Run", false);
+            }
+
+            //걷기 ON&OFF 및 캐릭터 이동
+            if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+            {
+                Debug.Log(new Vector2(pos_x, pos_z));
+                if (pos_x > 0)
                 {
-                    obj_Body.transform.localEulerAngles = new Vector3(0f, -45f, 0f);
-                    //transform.Rotate(new Vector3(0f, -45f, 0f));
+                    if (pos_z > 0)
+                    {
+                        obj_Body.transform.localEulerAngles = new Vector3(0f, 45f, 0f);
+                        //transform.Rotate(new Vector3(0f, 45f, 0f));
+                    }
+                    else if (pos_z < 0)
+                    {
+                        obj_Body.transform.localEulerAngles = new Vector3(0f, 135f, 0f);
+                        //transform.Rotate(new Vector3(0f, 135f, 0f));
+                    }
+                    else
+                    {
+                        obj_Body.transform.localEulerAngles = new Vector3(0f, 90f, 0f);
+                        //transform.Rotate(new Vector3(0f, 90f, 0f));
+                    }
                 }
-                else if (pos_z < 0)
+                else if (pos_x < 0)
                 {
-                    obj_Body.transform.localEulerAngles = new Vector3(0f, -135f, 0f);
-                    //transform.Rotate(new Vector3(0f, -135f, 0f));
+                    if (pos_z > 0)
+                    {
+                        obj_Body.transform.localEulerAngles = new Vector3(0f, -45f, 0f);
+                        //transform.Rotate(new Vector3(0f, -45f, 0f));
+                    }
+                    else if (pos_z < 0)
+                    {
+                        obj_Body.transform.localEulerAngles = new Vector3(0f, -135f, 0f);
+                        //transform.Rotate(new Vector3(0f, -135f, 0f));
+                    }
+                    else
+                    {
+                        obj_Body.transform.localEulerAngles = new Vector3(0f, 270f, 0f);
+                        //transform.Rotate(new Vector3(0f, 270f, 0f));
+                    }
                 }
                 else
                 {
-                    obj_Body.transform.localEulerAngles = new Vector3(0f, 270f, 0f);
-                    //transform.Rotate(new Vector3(0f, 270f, 0f));
+                    if (pos_z > 0)
+                    {
+                        obj_Body.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
+                        //transform.Rotate(new Vector3(0f, 0f, 0f));
+                    }
+                    else if (pos_z < 0)
+                    {
+                        obj_Body.transform.localEulerAngles = new Vector3(0f, 180f, 0f);
+                        //transform.Rotate(new Vector3(0f, 45f, 0f));
+                    }
+                }
+
+                m_Animator.SetBool("Walk", true);
+                if (m_Animator.GetBool("Run"))
+                {
+                    transform.Translate(new Vector3(pos_x, 0, pos_z) * Time.deltaTime * f_MoveSpeed * f_RunSpeed);
+                }
+                else
+                {
+                    //transform.position += new Vector3(pos_x, 0, pos_z) * Time.deltaTime * f_MoveSpeed;
+                    transform.Translate(new Vector3(pos_x, 0, pos_z) * Time.deltaTime * f_MoveSpeed);
                 }
             }
             else
             {
-                if (pos_z > 0)
-                {
-                    obj_Body.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
-                    //transform.Rotate(new Vector3(0f, 0f, 0f));
-                }
-                else if (pos_z < 0)
-                {
-                    obj_Body.transform.localEulerAngles = new Vector3(0f, 180f, 0f);
-                    //transform.Rotate(new Vector3(0f, 45f, 0f));
-                }
+                m_Animator.SetBool("Walk", false);
             }
 
-            m_Animator.SetBool("Walk", true);
-            if (m_Animator.GetBool("Run"))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                transform.Translate(new Vector3(pos_x, 0, pos_z) * Time.deltaTime * f_MoveSpeed * f_RunSpeed);
+                m_Animator.SetTrigger("Jump");
             }
-            else
+
+            if (Input.GetMouseButton(1))
             {
-                //transform.position += new Vector3(pos_x, 0, pos_z) * Time.deltaTime * f_MoveSpeed;
-                transform.Translate(new Vector3(pos_x, 0, pos_z) * Time.deltaTime * f_MoveSpeed);
+                float rot_x = Input.GetAxis("Mouse Y");
+                float rot_y = Input.GetAxis("Mouse X");
+                //obj_Rotate_Horizontal.transform.eulerAngles += new Vector3(0, rot_y, 0) * f_RotateSpeed;
+                transform.eulerAngles += new Vector3(0, rot_y, 0) * f_RotateSpeed;
             }
         }
-        else
-        {
-            m_Animator.SetBool("Walk", false);
-        }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            m_Animator.SetTrigger("Jump");
-        }
-
-        if (Input.GetMouseButton(1))
-        {
-            float rot_x = Input.GetAxis("Mouse Y");
-            float rot_y = Input.GetAxis("Mouse X");
-            //obj_Rotate_Horizontal.transform.eulerAngles += new Vector3(0, rot_y, 0) * f_RotateSpeed;
-            transform.eulerAngles += new Vector3(0, rot_y, 0) * f_RotateSpeed;
-        }
     }
 }
