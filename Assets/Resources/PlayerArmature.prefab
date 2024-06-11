@@ -1580,7 +1580,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3091142621490991894}
   - component: {fileID: 2583562654427100575}
-  - component: {fileID: 5006180940629274192}
   - component: {fileID: 5900160651596621876}
   m_Layer: 3
   m_Name: Cameraroot
@@ -1655,14 +1654,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &5006180940629274192
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2501237917521082200}
-  m_Enabled: 1
 --- !u!114 &5900160651596621876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2412,7 +2403,6 @@ GameObject:
   - component: {fileID: 2074028180777104703}
   - component: {fileID: 90419168583966239}
   - component: {fileID: 7435357207268612011}
-  - component: {fileID: 6193981063438694898}
   - component: {fileID: 3605088195561911443}
   m_Layer: 3
   m_Name: PlayerArmature
@@ -2684,6 +2674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 867fec82a9ad3c34b89aaf310e3761ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 0}
   aimCam: {fileID: 0}
   aimImage: {fileID: 0}
   aimObj: {fileID: 0}
@@ -2768,22 +2759,6 @@ CapsuleCollider:
   m_Height: 2.57
   m_Direction: 1
   m_Center: {x: 0, y: 0.92, z: 0}
---- !u!114 &6193981063438694898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4005281968741523930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59192f0f6d4ebfb43b43c4fc715a11df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aimPoint: {fileID: 1181755988858358847}
-  bulletPrefab: {fileID: 0}
-  bulletSpeed: 50
-  muzzleFlash: {fileID: 0}
 --- !u!114 &3605088195561911443
 MonoBehaviour:
   m_ObjectHideFlags: 0

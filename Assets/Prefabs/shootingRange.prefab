@@ -812,6 +812,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorAnimator: {fileID: 0}
+  GameController: {fileID: 0}
 --- !u!1 &828548433831583350
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,6 +1127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorAnimator: {fileID: 0}
+  GameController: {fileID: 0}
 --- !u!1 &1036185099067381859
 GameObject:
   m_ObjectHideFlags: 0
@@ -2111,6 +2113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorAnimator: {fileID: 0}
+  GameController: {fileID: 0}
 --- !u!1 &1907048376693443945
 GameObject:
   m_ObjectHideFlags: 0
@@ -3389,8 +3392,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd70066bc7dabaa46a9abb6284581016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BtnActive: 0
   CountDownText: {fileID: 0}
   Gun: {fileID: 0}
+  a: {fileID: 0}
 --- !u!65 &8959390118019988038
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3425,6 +3430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorAnimator: {fileID: 2570273132342227485}
+  GameController: {fileID: 0}
 --- !u!1 &2526904685163122718
 GameObject:
   m_ObjectHideFlags: 0
@@ -4435,8 +4441,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd70066bc7dabaa46a9abb6284581016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BtnActive: 0
   CountDownText: {fileID: 0}
   Gun: {fileID: 0}
+  a: {fileID: 0}
 --- !u!65 &124031688344790065
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4471,6 +4479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorAnimator: {fileID: 7837494361057814198}
+  GameController: {fileID: 0}
 --- !u!1 &2810725819102698004
 GameObject:
   m_ObjectHideFlags: 0
@@ -5562,8 +5571,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd70066bc7dabaa46a9abb6284581016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BtnActive: 0
   CountDownText: {fileID: 0}
   Gun: {fileID: 0}
+  a: {fileID: 0}
 --- !u!65 &27366464559039335
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5598,6 +5609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorAnimator: {fileID: 5894952374759249528}
+  GameController: {fileID: 0}
 --- !u!1 &3463039142560234306
 GameObject:
   m_ObjectHideFlags: 0
@@ -6584,8 +6596,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd70066bc7dabaa46a9abb6284581016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BtnActive: 0
   CountDownText: {fileID: 0}
   Gun: {fileID: 0}
+  a: {fileID: 0}
 --- !u!65 &3829274888680698953
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6620,6 +6634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorAnimator: {fileID: 2148005679675250935}
+  GameController: {fileID: 0}
 --- !u!1 &3911696456968539200
 GameObject:
   m_ObjectHideFlags: 0
@@ -6742,6 +6757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorAnimator: {fileID: 0}
+  GameController: {fileID: 0}
 --- !u!1 &3969337135010444597
 GameObject:
   m_ObjectHideFlags: 0
@@ -7736,6 +7752,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorAnimator: {fileID: 0}
+  GameController: {fileID: 0}
 --- !u!1 &4694575164608847982
 GameObject:
   m_ObjectHideFlags: 0
@@ -8466,6 +8483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorAnimator: {fileID: 0}
+  GameController: {fileID: 0}
 --- !u!64 &2188833133845750038
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9057,8 +9075,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd70066bc7dabaa46a9abb6284581016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BtnActive: 0
   CountDownText: {fileID: 0}
   Gun: {fileID: 0}
+  a: {fileID: 0}
 --- !u!65 &1338373263356484053
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9114,6 +9134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorAnimator: {fileID: 1535942253670566049}
+  GameController: {fileID: 0}
 --- !u!1 &5719205639857104385
 GameObject:
   m_ObjectHideFlags: 0
@@ -9825,8 +9846,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd70066bc7dabaa46a9abb6284581016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BtnActive: 0
   CountDownText: {fileID: 0}
   Gun: {fileID: 0}
+  a: {fileID: 0}
 --- !u!65 &6643882754912237614
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9861,6 +9884,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorAnimator: {fileID: 594626111002024695}
+  GameController: {fileID: 0}
 --- !u!1 &6197614989380360811
 GameObject:
   m_ObjectHideFlags: 0
@@ -11843,6 +11867,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorAnimator: {fileID: 0}
+  GameController: {fileID: 0}
 --- !u!1 &7178154297826307423
 GameObject:
   m_ObjectHideFlags: 0
@@ -12572,7 +12597,6 @@ GameObject:
   - component: {fileID: 8341524047008002743}
   - component: {fileID: 2509567249220767493}
   - component: {fileID: 447515776309715073}
-  - component: {fileID: 183849858967975691}
   m_Layer: 0
   m_Name: target_blue (5)
   m_TagString: Untagged
@@ -12647,28 +12671,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &447515776309715073
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7830222907512147525}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -4549571278306226580, guid: 43b87cea7f58b5b479cdc2c7b862502d, type: 3}
---- !u!64 &183849858967975691
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14993,8 +14995,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd70066bc7dabaa46a9abb6284581016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BtnActive: 0
   CountDownText: {fileID: 0}
   Gun: {fileID: 0}
+  a: {fileID: 0}
 --- !u!65 &993941511244546454
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15029,6 +15033,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorAnimator: {fileID: 1906984751153024996}
+  GameController: {fileID: 0}
 --- !u!1 &8661862085671227283
 GameObject:
   m_ObjectHideFlags: 0
