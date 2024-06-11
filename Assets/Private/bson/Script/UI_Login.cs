@@ -74,7 +74,7 @@ public class UI_Login : MonoBehaviour
 
             if (res.LoginOk)
             {
-                SceneManager.LoadScene("Map");
+                SceneManager.LoadScene("ShootingRange");
             }
         }));
     }
