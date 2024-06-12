@@ -41,14 +41,6 @@ MonoBehaviour:
   - RespawnSpaceship
   - RPC_CreateCharacter
   - ShootBullet
-  - JumpAndGravity
-  - PlayJumpAnimation
-  - OnTriggerEnter
-  - OnTriggerExit
-  - HandleTriggerEnter
-  - HandleTriggerExit
-  - GiveGun
-  - RemoveGun
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

@@ -1,8 +1,7 @@
-﻿using UnityEngine;
+﻿ using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
-using Photon.Pun;
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
@@ -13,7 +12,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM 
     [RequireComponent(typeof(PlayerInput))]
 #endif
-    public class ThirdPersonController : MonoBehaviourPun
+    public class ThirdPersonController : MonoBehaviour
     {
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
@@ -137,7 +136,7 @@ namespace StarterAssets
         private void Start()
         {
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-
+            
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
@@ -156,33 +155,11 @@ namespace StarterAssets
 
         private void Update()
         {
-
             _hasAnimator = TryGetComponent(out _animator);
-            if (photonView.IsMine)
-            {
-                // 이동, 회전 및 점프 로직을 처리합니다.
-                Move();
-                JumpAndGravity();
-                GroundedCheck();
-            }
-           /* JumpAndGravity();
+
+            JumpAndGravity();
             GroundedCheck();
-            Move();*/
-        }
-        void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-        {
-            if (stream.IsWriting)
-            {
-                // 현재 플레이어의 위치와 회전을 스트림에 씁니다.
-                stream.SendNext(transform.position);
-                stream.SendNext(transform.rotation);
-            }
-            else
-            {
-                // 다른 플레이어의 위치와 회전을 스트림에서 읽어옵니다.
-                transform.position = (Vector3)stream.ReceiveNext();
-                transform.rotation = (Quaternion)stream.ReceiveNext();
-            }
+            Move();
         }
 
         private void LateUpdate()
@@ -239,7 +216,7 @@ namespace StarterAssets
         {
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
-            if (isAimMove)
+            if (isAimMove) 
             {
                 targetSpeed = MoveSpeed;
             }
@@ -293,7 +270,7 @@ namespace StarterAssets
                 {
                     transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
                 }
-
+                
             }
 
 

@@ -8,7 +8,7 @@ public class DoorController : MonoBehaviour
     private bool isCursorOverObject = false;
     public Animator doorAnimator;
     private bool isopen = false;
-    
+    public GameController GameController;
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
     {
