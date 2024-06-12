@@ -28,7 +28,7 @@ public class Target : MonoBehaviour
             }
 
             // Á¡¼ö¸¦ Áõ°¡½ÃÅ´
-            ScoreManager.Instance.IncreaseScore(score);
+            GameController.Instance.IncreaseScore(score);
 
             // Ãæµ¹ÇÑ ÃÑ¾Ë ÆÄ±«
             Destroy(collision.gameObject);
