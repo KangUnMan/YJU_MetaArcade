@@ -8,9 +8,14 @@ using Photon.Pun;
 using System;
 using System.Diagnostics;
 using UnityEngine.SocialPlatforms;
+using UnityEngine.SocialPlatforms.Impl;
+using Debug = UnityEngine.Debug;
 
 public class GameController : MonoBehaviour
 {
+    //public Target bScript;
+    public int fix = 0;
+    public FirstPlayerController targetScript2;
     public PlayershootManager targetScript;
     public static GameController Instance; // 싱글톤 인스턴스
     private bool isMouseLocked = false;
@@ -25,6 +30,7 @@ public class GameController : MonoBehaviour
     public Text CountDownText;
     public GameObject Gun;
     private RandomObjectDisplay _randomObjectDisplay;
+    private Target _target;
     public TextMeshProUGUI a;
     public GameObject b;
     public Text stopwatchText; // �����ġ �ð��� ǥ���� UI Text
@@ -42,6 +48,7 @@ public class GameController : MonoBehaviour
     {
         _randomObjectDisplay = GetComponent<RandomObjectDisplay>();
         _randomObjectDisplay.enabled = false;
+        _target = GetComponent<Target>();
     }
     
     private void Update()
@@ -70,24 +77,36 @@ public class GameController : MonoBehaviour
         {
             if (Input.GetMouseButton(1) && Input.GetMouseButtonDown(0))
             {
-                if (count < maxCount)
+                if(fix == 0)
                 {
-                    UpdateCounterText();
-                    count++;
-                    UpdateCounterText();
-                    
+                    if (count < maxCount)
+                    {
+                        UpdateCounterText();
+                        count++;
+                        UpdateCounterText();
+
+                    }
+                    //count를 30으로 설정하면 총알이 날아가는 도중에 팝업이 떠서 그 후에 점수 갱신이 됨, count를 31로 하면 30발을 다 쏘고 좌클릭을 한 번 더 해야 하는 불편함이 있지만 점수갱신과 팝업창은 동시에 이루어짐
+                    if (count == 31)
+                    {
+                        
+                        count = 0;
+                        //targetScript2.enabled = false;
+                        targetScript.enabled = false;
+                        Gun.SetActive(false);
+                        Popup.SetActive(true);
+                        StopStopwatch();
+                        EndGame();
+                        fix = 1;
+
+
+                    }
                 }
-                if (count == 31)
+                if(fix == 1)
                 {
-                    
-                    
-                    targetScript.enabled = false;
-                    Gun.SetActive(false);
-                    
-                    Popup.SetActive(true);
-                    /*stopwatchText.text = "00:00:00";
-                    counterText.text = count + "0/30";*/
+
                 }
+               
             }
         }
     }
@@ -104,8 +123,9 @@ public class GameController : MonoBehaviour
             BtnActive = true;
             b.SetActive(true);
             StartStopwatch();
-            count = 0;
-
+            fix = 0;
+            score = 0;
+            
             //but.SetActive(false);
 
 
@@ -118,6 +138,7 @@ public class GameController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+
             Gun.SetActive(false);
             BtnActive = false;
             b.SetActive(false);
@@ -125,7 +146,13 @@ public class GameController : MonoBehaviour
             StopStopwatch();
             Reset();
             targetScript.enabled = true;
-
+            targetScript2.enabled = true;
+            //bScript.ResetB();
+            Debug.Log("Resetting score...");
+            score = 0;
+            Debug.Log("Score after reset: " + score);
+            count = 0;
+            
 
         }
     }
@@ -160,8 +187,16 @@ public class GameController : MonoBehaviour
     public void IncreaseScore(int value)
     {
         score += value;
-        UnityEngine.Debug.Log(score);
-        scoretext();
+        
+        if(count < 31)
+        {
+            scoretext();
+            
+        }
+        
+        Debug.Log(count);
+        Debug.Log(score);
+
     }
     private void StartGame()
     {
@@ -177,13 +212,13 @@ public class GameController : MonoBehaviour
         isStopwatchRunning = true;
     }
 
-    // �����ġ ���� �޼���
+  
     void StopStopwatch()
     {
         isStopwatchRunning = false;
     }
 
-    // �����ġ ���� �޼���
+ 
     void ResetStopwatch()
     {
         elapsedTime = 0f;

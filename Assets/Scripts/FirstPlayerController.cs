@@ -7,7 +7,7 @@ public class FirstPlayerController : MonoBehaviour
     public GameObject a; // 상체에 해당하는 GameObject
     public float moveSpeed = 5f;
     public float rotationSpeed = 100f;
-    public float maxVerticalAngle = 80f; // 플레이어가 볼 수 있는 최대 상단 각도
+    public float maxVerticalAngle = 100f; // 플레이어가 볼 수 있는 최대 상단 각도
     public float minVerticalAngle = -80f; // 플레이어가 볼 수 있는 최대 하단 각도
 
     private CharacterController controller; // CharacterController 참조
