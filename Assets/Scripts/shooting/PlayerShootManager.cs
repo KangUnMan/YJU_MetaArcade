@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayershootManager : MonoBehaviour
@@ -5,14 +6,25 @@ public class PlayershootManager : MonoBehaviour
     public Transform firePoint; // 총알이 발사되는 위치
     public GameObject bulletPrefab; // 총알 프리팹
     public float bulletForce = 20f; // 총알 발사 속도
-
+    private bool isRightClick = false;
     void Update()
     {
-        // 마우스 왼쪽 버튼을 누르면 발사
-        if (Input.GetButtonDown("Fire1"))
-        {
-            Shoot();
+        if(Input.GetButtonDown("Fire2")) {
+            isRightClick = true;
         }
+        else if (Input.GetButtonUp("Fire2"))
+        {
+            isRightClick=false;
+        }
+        // 마우스 왼쪽 버튼을 누르면 발사
+        if(isRightClick)
+            if (Input.GetButtonDown("Fire1"))
+            {
+                Shoot();
+            }
+        
+        
+
     }
 
     void Shoot()
@@ -36,4 +48,6 @@ public class PlayershootManager : MonoBehaviour
             Debug.LogWarning("총알에 Rigidbody가 없습니다.");
         }
     }
+
+
 }
