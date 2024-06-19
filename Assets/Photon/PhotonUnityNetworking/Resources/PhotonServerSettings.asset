@@ -41,6 +41,8 @@ MonoBehaviour:
   - RespawnSpaceship
   - RPC_CreateCharacter
   - ShootBullet
+  - OnTriggerEnter
+  - OnTriggerExit
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

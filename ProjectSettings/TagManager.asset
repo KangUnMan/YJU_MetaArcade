@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - CinemachineTarget
+  - Bullet
+  - Blue
+  - Red
+  - Green
+  - ShootingZone
   layers:
   - Default
   - TransparentFX
