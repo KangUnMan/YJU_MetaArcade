@@ -14,6 +14,10 @@ using Debug = UnityEngine.Debug;
 public class GameController : MonoBehaviour
 {
     //public Target bScript;
+    public AudioSource audioSource; // AudioSource를 연결할 변수
+    public AudioClip shootSound;
+    public ScoreManager scoreManager;
+    public Leaderboard leaderboard;
     public int fix = 0;
     public FirstPlayerController targetScript2;
     public PlayershootManager targetScript;
@@ -49,6 +53,7 @@ public class GameController : MonoBehaviour
         _randomObjectDisplay = GetComponent<RandomObjectDisplay>();
         _randomObjectDisplay.enabled = false;
         _target = GetComponent<Target>();
+        audioSource = GetComponent<AudioSource>();
     }
     
     private void Update()
@@ -84,7 +89,7 @@ public class GameController : MonoBehaviour
                         UpdateCounterText();
                         count++;
                         UpdateCounterText();
-
+                        PlayShootSound();
                     }
                     //count를 30으로 설정하면 총알이 날아가는 도중에 팝업이 떠서 그 후에 점수 갱신이 됨, count를 31로 하면 30발을 다 쏘고 좌클릭을 한 번 더 해야 하는 불편함이 있지만 점수갱신과 팝업창은 동시에 이루어짐
                     if (count == 31)
@@ -104,7 +109,7 @@ public class GameController : MonoBehaviour
                 }
                 if(fix == 1)
                 {
-
+                    score = 0;
                 }
                
             }
@@ -116,6 +121,7 @@ public class GameController : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
+            scoretext();
             Reset();
             UpdateCounterText();
             Gun.SetActive(true);
@@ -125,6 +131,7 @@ public class GameController : MonoBehaviour
             StartStopwatch();
             fix = 0;
             score = 0;
+            
             
             //but.SetActive(false);
 
@@ -171,8 +178,13 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(delay);
         StartGame();
     }
-    
-    
+    public void RecordPlayerScore(string playerName, int score)
+    {
+        scoreManager.AddScore(playerName, score);
+        leaderboard.UpdateLeaderboard();
+    }
+
+
     public void pausegame()
     {
         Time.timeScale = 0;
@@ -182,8 +194,15 @@ public class GameController : MonoBehaviour
     {
         Time.timeScale = 1;
     }
-   
-    
+    private void PlayShootSound()
+    {
+        if (audioSource != null && shootSound != null)
+        {
+            audioSource.PlayOneShot(shootSound);
+        }
+    }
+
+
     public void IncreaseScore(int value)
     {
         score += value;

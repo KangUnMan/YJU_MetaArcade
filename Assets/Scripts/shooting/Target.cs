@@ -8,7 +8,7 @@ public class Target : MonoBehaviour
     public int greenScore = 2;
     public int blueScore = 3;
     public CanvasGroup canvasGroup;
-    public GameObject a;
+    
     private GameController _gameController;
     public float fadeDuration = 1.0f; // 페이드 인/아웃 지속 시간
     private bool isFadingIn = false;
@@ -29,24 +29,24 @@ public class Target : MonoBehaviour
             int score = 0;
 
             // 충돌한 총알이 빨간, 초록, 파란 과녁 중 어떤 것에 충돌했는지 확인
-            if (gameObject.CompareTag("Red") && !isFadingIn && !isFadingOut)
+            if (gameObject.CompareTag("Red"))
             {
                 score = redScore;
-                a.SetActive(true);
+                
                 StartCoroutine(FadeIn());
             }
 
-            else if (gameObject.CompareTag("Green") && !isFadingIn && !isFadingOut)
+            else if (gameObject.CompareTag("Green"))
             {
                 score = greenScore;
-                a.SetActive(true);
+                
                 StartCoroutine(FadeIn());
             }
-            else if (gameObject.CompareTag("Blue") && !isFadingIn && !isFadingOut) 
+            else if (gameObject.CompareTag("Blue")) 
             {
                 Debug.Log("파랑");
                 score = blueScore;
-                a.SetActive(true);
+                
                 StartCoroutine(FadeIn());
             }
 
