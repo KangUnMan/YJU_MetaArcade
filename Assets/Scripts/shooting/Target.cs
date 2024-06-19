@@ -8,7 +8,7 @@ public class Target : MonoBehaviour
     public int greenScore = 2;
     public int blueScore = 3;
     public CanvasGroup canvasGroup;
-    public GameObject a;
+    
     private GameController _gameController;
     public float fadeDuration = 1.0f; // 페이드 인/아웃 지속 시간
     private bool isFadingIn = false;
@@ -32,21 +32,21 @@ public class Target : MonoBehaviour
             if (gameObject.CompareTag("Red"))
             {
                 score = redScore;
-                a.SetActive(true);
+                
                 StartCoroutine(FadeIn());
             }
 
             else if (gameObject.CompareTag("Green"))
             {
                 score = greenScore;
-                a.SetActive(true);
+                
                 StartCoroutine(FadeIn());
             }
             else if (gameObject.CompareTag("Blue")) 
             {
                 Debug.Log("파랑");
                 score = blueScore;
-                a.SetActive(true);
+                
                 StartCoroutine(FadeIn());
             }
 
@@ -80,13 +80,13 @@ public class Target : MonoBehaviour
         isFadingIn = false;
 
         // 페이드 인이 끝난 후 일정 시간 대기
-        //yield return new WaitForSeconds(0.2f); // 예를 들어 2초 대기
+        yield return new WaitForSeconds(0.2f); // 예를 들어 2초 대기
 
         // 페이드 아웃 시작
-       // StartCoroutine(FadeOut());
+        StartCoroutine(FadeOut());
     }
 
-    /*public IEnumerator FadeOut()
+    public IEnumerator FadeOut()
     {
         isFadingOut = true;
         float elapsedTime = 0.0f;
@@ -103,5 +103,5 @@ public class Target : MonoBehaviour
 
         // 페이드 아웃이 끝난 후 게임 오브젝트 비활성화
         gameObject.SetActive(false);
-    }*/
+    }
 }

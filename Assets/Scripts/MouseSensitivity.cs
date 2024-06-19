@@ -4,9 +4,12 @@ using TMPro;
 
 public class MouseSensitivity : MonoBehaviour
 {
-    public Slider sensitivitySlider;
-    public TextMeshProUGUI sensitivityText;
-    private float sensitivity = 1.0f;
+    public Slider sensitivitySlider; // 슬라이더 UI
+    public TextMeshProUGUI sensitivityText; // 텍스트 UI
+    private float sensitivity = 1.0f; // 초기 감도 값
+
+    private Transform playerBody; // 플레이어의 몸체 Transform
+    private float xRotation = 0f; // 카메라의 x축 회전 값
 
     void Start()
     {
@@ -20,6 +23,12 @@ public class MouseSensitivity : MonoBehaviour
 
         // 초기 감도 값 설정
         UpdateSensitivityText();
+
+        // 플레이어의 몸체 Transform 가져오기
+        playerBody = transform.parent; // 부모 오브젝트로 가정, 적절하게 수정 필요
+
+        // 마우스 커서 숨기기
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
@@ -28,10 +37,13 @@ public class MouseSensitivity : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X") * sensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
 
-        // 여기서 마우스 움직임을 이용한 캐릭터 움직임 또는 카메라 회전을 처리합니다.
-        // 예를 들어, 카메라 회전:
-        // transform.Rotate(Vector3.up * mouseX);
-        // transform.Rotate(Vector3.left * mouseY);
+        // 카메라의 x축 회전을 y축 입력값으로 변경
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+        // 카메라와 플레이어의 회전 적용
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        playerBody.Rotate(Vector3.up * mouseX);
     }
 
     void OnSensitivityChanged(float value)

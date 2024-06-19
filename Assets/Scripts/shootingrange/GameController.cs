@@ -104,7 +104,7 @@ public class GameController : MonoBehaviour
                 }
                 if(fix == 1)
                 {
-
+                    score = 0;
                 }
                
             }
