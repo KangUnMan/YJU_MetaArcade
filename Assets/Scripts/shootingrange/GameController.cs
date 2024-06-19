@@ -116,6 +116,7 @@ public class GameController : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
+            scoretext();
             Reset();
             UpdateCounterText();
             Gun.SetActive(true);
@@ -125,6 +126,7 @@ public class GameController : MonoBehaviour
             StartStopwatch();
             fix = 0;
             score = 0;
+            
             
             //but.SetActive(false);
 

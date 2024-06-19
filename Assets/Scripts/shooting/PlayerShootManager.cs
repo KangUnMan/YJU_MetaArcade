@@ -16,11 +16,12 @@ public class PlayershootManager : MonoBehaviour
         {
             isRightClick=false;
         }
-        // 마우스 왼쪽 버튼을 누르면 발사
+        
         if(isRightClick)
             if (Input.GetButtonDown("Fire1"))
             {
                 Shoot();
+                
             }
         
         

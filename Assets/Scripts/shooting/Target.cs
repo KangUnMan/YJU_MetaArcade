@@ -29,20 +29,20 @@ public class Target : MonoBehaviour
             int score = 0;
 
             // 충돌한 총알이 빨간, 초록, 파란 과녁 중 어떤 것에 충돌했는지 확인
-            if (gameObject.CompareTag("Red") && !isFadingIn && !isFadingOut)
+            if (gameObject.CompareTag("Red"))
             {
                 score = redScore;
                 a.SetActive(true);
                 StartCoroutine(FadeIn());
             }
 
-            else if (gameObject.CompareTag("Green") && !isFadingIn && !isFadingOut)
+            else if (gameObject.CompareTag("Green"))
             {
                 score = greenScore;
                 a.SetActive(true);
                 StartCoroutine(FadeIn());
             }
-            else if (gameObject.CompareTag("Blue") && !isFadingIn && !isFadingOut) 
+            else if (gameObject.CompareTag("Blue")) 
             {
                 Debug.Log("파랑");
                 score = blueScore;
@@ -80,13 +80,13 @@ public class Target : MonoBehaviour
         isFadingIn = false;
 
         // 페이드 인이 끝난 후 일정 시간 대기
-        yield return new WaitForSeconds(0.2f); // 예를 들어 2초 대기
+        //yield return new WaitForSeconds(0.2f); // 예를 들어 2초 대기
 
         // 페이드 아웃 시작
-        StartCoroutine(FadeOut());
+       // StartCoroutine(FadeOut());
     }
 
-    public IEnumerator FadeOut()
+    /*public IEnumerator FadeOut()
     {
         isFadingOut = true;
         float elapsedTime = 0.0f;
@@ -103,5 +103,5 @@ public class Target : MonoBehaviour
 
         // 페이드 아웃이 끝난 후 게임 오브젝트 비활성화
         gameObject.SetActive(false);
-    }
+    }*/
 }
