@@ -27030,6 +27030,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HighScorePopUp
       objectReference: {fileID: 0}
+    - target: {fileID: 8871501549172017824, guid: 89d81b36e1a1deb409cbd277e8339403,
+        type: 3}
+      propertyPath: _Board
+      value: 
+      objectReference: {fileID: 4837972916838270521}
     - target: {fileID: 8887595474117705970, guid: 89d81b36e1a1deb409cbd277e8339403,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -27080,6 +27085,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89d81b36e1a1deb409cbd277e8339403, type: 3}
+--- !u!1 &4837972916838270521 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9146404672091086455, guid: 89d81b36e1a1deb409cbd277e8339403,
+    type: 3}
+  m_PrefabInstance: {fileID: 4837972916838270520}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5550337502395294669
 RectTransform:
   m_ObjectHideFlags: 0

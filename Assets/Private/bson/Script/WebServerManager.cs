@@ -7,6 +7,7 @@ using UnityEngine.Assertions;
 using UnityEngine.Networking;
 using WebSocketSharp;
 using Newtonsoft.Json;
+using System.Security.Cryptography;
 
 public class WebServerManager: MonoBehaviour
 {
@@ -47,7 +48,8 @@ public class WebServerManager: MonoBehaviour
         StartCoroutine(PostSend<LoginAccountPacketRes>("Account/login", obj, (packet) =>
         {
             _token = (packet.LoginOk) ? packet.Token : null;
-            
+            UserName = (packet.LoginOk) ? packet.UserName : string.Empty;
+
             res?.Invoke(packet);
         }));
     }
@@ -57,6 +59,32 @@ public class WebServerManager: MonoBehaviour
         StartCoroutine(PostSend<CreateAccountPacketRes>("Account/create", obj, (packet) =>
         {
             res?.Invoke(packet);
+        }));
+    }
+
+    public bool SetScore(int score)
+    {
+        if (!IsJWT)
+        {
+            return false;
+        }
+
+        SetRankingPacketReq obj = new SetRankingPacketReq()
+        {
+            AccountName = UserName,
+            Score = score,
+        };
+
+        StartCoroutine(PostSend<CreateAccountPacketRes>("Ranking/create", obj, null));
+
+        return true;
+    }
+
+    public void UpdateRanking(Action<List<RankingPacketRes>> res)
+    {
+        StartCoroutine(PostSend<List<RankingPacketRes>>("Ranking/get", null, (packet) =>
+        {
+            res.Invoke(packet);
         }));
     }
     
