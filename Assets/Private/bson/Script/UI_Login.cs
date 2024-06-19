@@ -17,7 +17,7 @@ public class UI_Login : MonoBehaviour
     [SerializeField] Button signUpBtn;
     [SerializeField] Button signInBtn;
 
-    const string tempUrl = "https://localhost:7130/api";
+    //const string tempUrl = "https://localhost:7130/api";
 
     private void Awake()
     {
@@ -41,13 +41,14 @@ public class UI_Login : MonoBehaviour
             AccountName = loginText.text,
             Password = passwordText.text,
         };
-        StartCoroutine(PostSend<CreateAccountPacketRes>("Account/create", packet, (res) =>
+        
+        WebServerManager.Instance.SignUp(packet, (res) =>
         {
             Debug.Log(res.CreateOk);
             infoText.text = $"SignUP: {res.CreateOk}";
             loginText.text = "";
             passwordText.text = "";
-        }));
+        });
     }
 
     void OnClickSignIn()
@@ -65,7 +66,8 @@ public class UI_Login : MonoBehaviour
             AccountName = loginText.text,
             Password = passwordText.text,
         };
-        StartCoroutine(PostSend<LoginAccountPacketRes>("Account/login", packet, (res) =>
+        
+        WebServerManager.Instance.Login(packet,(res) =>
         {
             Debug.Log(res.LoginOk);
             infoText.text = $"LogIn: {res.LoginOk}";
@@ -76,39 +78,52 @@ public class UI_Login : MonoBehaviour
             {
                 SceneManager.LoadScene("ShootingRange");
             }
-        }));
+        });
+        
+        // StartCoroutine(WebServerManager.Instance.PostSend<LoginAccountPacketRes>("Account/login", packet, (res) =>
+        // {
+        //     Debug.Log(res.LoginOk);
+        //     infoText.text = $"LogIn: {res.LoginOk}";
+        //     loginText.text = "";
+        //     passwordText.text = "";
+        //
+        //     if (res.LoginOk)
+        //     {
+        //         SceneManager.LoadScene("ShootingRange");
+        //     }
+        // }));
     }
 
-    IEnumerator PostSend<T>(string url, object obj, Action<T> res)
-    {
-        string sendUrl = $"{tempUrl}/{url}";
-
-        byte[] jsonBytes = null;
-        if (obj != null)
-        {
-            string jsonStr = JsonUtility.ToJson(obj);
-            jsonBytes = Encoding.UTF8.GetBytes(jsonStr);
-        }
-
-        using (var uwr = new UnityWebRequest(sendUrl, "POST"))
-        {
-            uwr.uploadHandler = new UploadHandlerRaw(jsonBytes);
-            uwr.downloadHandler = new DownloadHandlerBuffer();
-            uwr.SetRequestHeader("Content-Type", "application/json");
-
-            yield return uwr.SendWebRequest();
-
-            if (uwr.isNetworkError || uwr.isHttpError)
-            {
-                Debug.Log(uwr.error);
-                infoText.text = uwr.error;
-            }
-            else
-            {
-                //Debug.Log(uwr.downloadHandler.text);
-                T resObj = JsonUtility.FromJson<T>(uwr.downloadHandler.text);
-                res.Invoke(resObj);
-            }
-        }
-    }
+    // IEnumerator PostSend<T>(string url, object obj, Action<T> res)
+    // {
+    //     string sendUrl = $"{tempUrl}/{url}";
+    //
+    //     byte[] jsonBytes = null;
+    //     if (obj != null)
+    //     {
+    //         string jsonStr = JsonUtility.ToJson(obj);
+    //         jsonBytes = Encoding.UTF8.GetBytes(jsonStr);
+    //     }
+    //
+    //     using (var uwr = new UnityWebRequest(sendUrl, "POST"))
+    //     {
+    //         uwr.uploadHandler = new UploadHandlerRaw(jsonBytes);
+    //         uwr.downloadHandler = new DownloadHandlerBuffer();
+    //         uwr.SetRequestHeader("Content-Type", "application/json");
+    //
+    //         yield return uwr.SendWebRequest();
+    //
+    //         if (uwr.isNetworkError || uwr.isHttpError)
+    //         {
+    //             Debug.Log(uwr.error);
+    //             infoText.text = uwr.error;
+    //         }
+    //         else
+    //         {
+    //             //Debug.Log(uwr.downloadHandler.text);
+    //             T resObj = JsonUtility.FromJson<T>(uwr.downloadHandler.text);
+    //             res.Invoke(resObj);
+    //         }
+    //     }
+    // }
 }
