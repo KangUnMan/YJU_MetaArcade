@@ -17,6 +17,7 @@ public class UI_Login : MonoBehaviour
     [SerializeField] TMP_InputField passwordText;
     [SerializeField] Button signUpBtn;
     [SerializeField] Button signInBtn;
+    [SerializeField] Button exitBtn;
 
     //const string tempUrl = "https://localhost:7130/api";
 
@@ -24,6 +25,7 @@ public class UI_Login : MonoBehaviour
     {
         signUpBtn.onClick.AddListener(OnClickSignUp);
         signInBtn.onClick.AddListener(OnClickSignIn);
+        exitBtn.onClick.AddListener(OnClickExitBtn);
         infoText.text = "";
     }
 
@@ -46,10 +48,20 @@ public class UI_Login : MonoBehaviour
         WebServerManager.Instance.SignUp(packet, (res) =>
         {
             Debug.Log(res.CreateOk);
-            infoText.text = $"SignUP: {res.CreateOk}";
+            string result = (res.CreateOk) ? "Success" : "Fail";
+            infoText.text = $"SignUP: {result}";
             loginText.text = "";
             passwordText.text = "";
         });
+    }
+
+    void OnClickExitBtn()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     void OnClickSignIn()
@@ -67,11 +79,12 @@ public class UI_Login : MonoBehaviour
             AccountName = loginText.text,
             Password = passwordText.text,
         };
-        
-        WebServerManager.Instance.Login(packet,(res) =>
+
+        WebServerManager.Instance.Login(packet, (res) =>
         {
             Debug.Log(res.LoginOk);
-            infoText.text = $"LogIn: {res.LoginOk}";
+            string result = (res.LoginOk) ? "Success" : "Fail";
+            infoText.text = $"LogIn: {result}";
             loginText.text = "";
             passwordText.text = "";
 
