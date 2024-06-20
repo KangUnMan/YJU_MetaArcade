@@ -84,7 +84,7 @@ public class WebServerManager: MonoBehaviour
     {
         StartCoroutine(PostSend<List<RankingPacketRes>>("Ranking/get", null, (packet) =>
         {
-            res.Invoke(packet);
+            res?.Invoke(packet);
         }));
     }
     
@@ -122,7 +122,7 @@ public class WebServerManager: MonoBehaviour
             {
                 //Debug.Log(uwr.downloadHandler.text);
                 T resObj = JsonConvert.DeserializeObject<T>(uwr.downloadHandler.text);
-                res.Invoke(resObj);
+                res?.Invoke(resObj);
             }
         }
     }

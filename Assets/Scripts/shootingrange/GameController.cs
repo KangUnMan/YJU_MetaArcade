@@ -300,4 +300,9 @@ public class GameController : MonoBehaviour
              b.SetActive(false);
          }
      }*/
+
+    public void SendMyScore()
+    {
+        WebServerManager.Instance.SetScore(score);
+    }
 }
