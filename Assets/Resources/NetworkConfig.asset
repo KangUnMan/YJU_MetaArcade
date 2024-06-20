@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ef7df4ff252ae5418ec074ecae74e1f, type: 3}
   m_Name: NetworkConfig
   m_EditorClassIdentifier: 
-  UrlForWeb: 
+  UrlForWeb: https://yju-meta-webserver20240620172205.azurewebsites.net/api
   UrlForLocal: https://localhost:7130/api
