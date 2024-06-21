@@ -1,6 +1,7 @@
 using Cinemachine;
 using Photon.Pun;
 using StarterAssets;
+using System.ComponentModel;
 using UnityEngine;
 
 public class Player_Manager : MonoBehaviour
@@ -15,7 +16,7 @@ public class Player_Manager : MonoBehaviour
     public PhotonView PV;
 
     [Header("Aim")]
-    [SerializeField] private CinemachineVirtualCamera aimCam;
+   // [SerializeField] private CinemachineVirtualCamera scopeCam;
     [SerializeField] private Camera scopeCam;
     [SerializeField] private GameObject PlayerCam;
 
@@ -49,53 +50,63 @@ public class Player_Manager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("ShootingZone"))
+        if (PV.IsMine)
         {
-            isInShootingZone = true;
-            Gun.SetActive(true);
+            if (other.CompareTag("ShootingZone"))
+            {
+                isInShootingZone = true;
+                Gun.SetActive(true);
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("ShootingZone"))
+        if (PV.IsMine)
         {
-            isInShootingZone = false;
-            Gun.SetActive(false);
-            // Exit 시 스코프 모드 해제
-            DisableScopeMode();
+            if (other.CompareTag("ShootingZone"))
+            {
+                isInShootingZone = false;
+                Gun.SetActive(false);
+                // Exit 시 스코프 모드 해제
+                DisableScopeMode();
+            }
         }
     }
 
     private void ScopeMode()
     {
-        
-        if (Input.GetButtonDown("Fire2"))
+        if (PV.IsMine)
         {
-            
-            scopeCam.gameObject.SetActive(true);
-            PlayerCam.gameObject.SetActive(false);
-            controller.enabled = false;
-            fpc.enabled = true;
-            ani.SetLayerWeight(1, 1);
-            isScoped = true;
-        }
-        else if (Input.GetButtonUp("Fire2"))
-        {
-            DisableScopeMode();
-        }
-        
+            if (Input.GetButtonDown("Fire2"))
+            {
+
+                scopeCam.gameObject.SetActive(true);
+                PlayerCam.gameObject.SetActive(false);
+                controller.enabled = false;
+                fpc.enabled = true;
+                ani.SetLayerWeight(1, 1);
+                isScoped = true;
+            }
+            else if (Input.GetButtonUp("Fire2"))
+            {
+                DisableScopeMode();
+            }
+        } 
             
     }
 
     private void DisableScopeMode()
     {
-        scopeCam.gameObject.SetActive(false);
-        PlayerCam.gameObject.SetActive(true);
-        controller.enabled = true;
-        fpc.enabled = false;
-        ani.SetLayerWeight(1, 0);
-        transform.rotation = originalRotation;
-        isScoped = false;
+        if (PV.IsMine)
+        {
+            scopeCam.gameObject.SetActive(false);
+            PlayerCam.gameObject.SetActive(true);
+            controller.enabled = true;
+            fpc.enabled = false;
+            ani.SetLayerWeight(1, 0);
+            transform.rotation = originalRotation;
+            isScoped = false;
+        }
     }
 }
