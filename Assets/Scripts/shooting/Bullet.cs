@@ -6,9 +6,7 @@ using Photon.Realtime;
 
 public class Bullet : MonoBehaviourPunCallbacks // ÃÑ¾Ë ÆÄ±« ½ºÅ©¸³Æ®
 {
-    public Transform aimPoint;
-    // Start is called before the first frame update
-
+ 
     private void Awake()
     {
     }

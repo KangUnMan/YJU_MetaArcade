@@ -4026,6 +4026,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1000013972658500, guid: f6b31320c619d6243a0cbdd32d3e2d91,
     type: 3}
   bulletForce: 50
+  muzzleFlash: {fileID: 0}
 --- !u!114 &8142931561308970480
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayershootManager : MonoBehaviour
@@ -7,6 +8,7 @@ public class PlayershootManager : MonoBehaviour
     public GameObject bulletPrefab; // 총알 프리팹
     public float bulletForce = 20f; // 총알 발사 속도
     private bool isRightClick = false;
+    public ParticleSystem muzzleFlash;
     void Update()
     {
         if(Input.GetButtonDown("Fire2")) {
@@ -28,15 +30,20 @@ public class PlayershootManager : MonoBehaviour
 
     }
 
+    IEnumerator WaitAndPrint()
+    {
+        // 0.5초 동안 대기
+        yield return new WaitForSeconds(0.05f);
+
+    }
+
     void Shoot()
     {
+        Vector3 spawnPosition = firePoint.position + new Vector3(0, -0.1f, 0);
         // 총알을 생성하고 발사 위치에 배치
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-
-        // 총알의 방향 설정
-        //Vector3 shootDirection = (firePoint.forward + Random.insideUnitSphere * 0.05f).normalized;
-        //bullet.transform.forward = shootDirection;
-
+        GameObject bullet = Instantiate(bulletPrefab, spawnPosition, firePoint.rotation);
+        
+        StartCoroutine(WaitAndPrint());
         // 발사 속도와 방향에 따라 총알을 전진시킴
         Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
         if (bulletRigidbody != null)
