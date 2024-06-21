@@ -36,6 +36,8 @@ public class GameController : MonoBehaviourPunCallbacks
     private bool originalCursorState;
     private bool isPopupActive = false;
 
+    [SerializeField] Button _saveBtn;
+
     // 게임 시작 시 인스턴스를 설정합니다.
     private void Awake()
     {
@@ -48,6 +50,8 @@ public class GameController : MonoBehaviourPunCallbacks
         _randomObjectDisplay.enabled = false;
         _target = GetComponent<Target>();
         audioSource = GetComponent<AudioSource>();
+
+        _saveBtn.onClick.AddListener(SendMyScore);
     }
 
     private void Update()

@@ -5129,6 +5129,8 @@ MonoBehaviour:
   stopwatchText: {fileID: 6802841823889503113}
   but: {fileID: 0}
   randomObjectDisplay: {fileID: 0}
+  _saveBtn: {fileID: 6214645372602893907}
+  _exitBtn: {fileID: 808684503867824275}
 --- !u!1 &7313346686015553789
 GameObject:
   m_ObjectHideFlags: 0

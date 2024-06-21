@@ -20,9 +20,18 @@ public class ScoreBoardController : MonoBehaviourPunCallbacks
     private int score; // 현재 점수
     public RandomObjectDisplay randomObjectDisplay; // RandomObjectDisplay 참조
 
+    [SerializeField] Button _saveBtn;
+    [SerializeField] Button _exitBtn;
+
+    private int _score;
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+
+        _saveBtn.onClick.AddListener(SendMyScore);
+        _saveBtn.onClick.AddListener(popupExit);
+        _exitBtn.onClick.AddListener(popupExit);
     }
 
     public void PlayShootSound()
@@ -38,6 +47,8 @@ public class ScoreBoardController : MonoBehaviourPunCallbacks
         if (photonView.IsMine) // 로컬 플레이어인지 확인
         {
             Popup.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 
@@ -70,6 +81,7 @@ public class ScoreBoardController : MonoBehaviourPunCallbacks
 
     public void UpdateScoreText()
     {
+        _score = score;
         scoreText.text = "당신의 점수는: " + score + "점";
         Debug.Log("UpdateScoreText called. Score: " + score);
     }
@@ -122,6 +134,8 @@ public class ScoreBoardController : MonoBehaviourPunCallbacks
         {
             Popup.SetActive(false);
             Time.timeScale = 1;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 
@@ -137,6 +151,6 @@ public class ScoreBoardController : MonoBehaviourPunCallbacks
 
     public void SendMyScore()
     {
-        WebServerManager.Instance.SetScore(score);
+        WebServerManager.Instance.SetScore(_score);
     }
 }
