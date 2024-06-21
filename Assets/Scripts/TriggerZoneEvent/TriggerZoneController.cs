@@ -13,6 +13,7 @@ public class TriggerZoneController : MonoBehaviourPunCallbacks
     private bool isStopwatchRunning = false; // 스톱워치 실행 여부
     private float elapsedTime = 0f; // 경과 시간
 
+    public RandomObjectDisplay randomObjectDisplay; // RandomObjectDisplay 참조
     private ScoreBoardController playerScoreBoardController; // 트리거 존에 들어온 플레이어의 ScoreBoardController
 
     private void Awake()
@@ -81,6 +82,25 @@ public class TriggerZoneController : MonoBehaviourPunCallbacks
                     return;
                 }
 
+                // 트리거 존의 RandomObjectDisplay를 플레이어의 ScoreBoardController에 설정
+                playerScoreBoardController.randomObjectDisplay = randomObjectDisplay;
+
+                // 모든 Target 스크립트에 ScoreBoardController 설정
+                foreach (var target in FindObjectsOfType<Target>())
+                {
+                    target.SetScoreBoardController(playerScoreBoardController);
+                }
+
+                // 모든 RandomObjectDisplay의 오브젝트에 ScoreBoardController 설정
+                foreach (var obj in randomObjectDisplay.objects)
+                {
+                    var target = obj.GetComponent<Target>();
+                    if (target != null)
+                    {
+                        target.SetScoreBoardController(playerScoreBoardController);
+                    }
+                }
+
                 playerScoreBoardController.ResetScoreText();
                 Reset();
                 playerScoreBoardController.UpdateCounterText(count);
@@ -88,7 +108,6 @@ public class TriggerZoneController : MonoBehaviourPunCallbacks
                 playerScoreBoardController.ActivateButton(true);
                 StartStopwatch();
                 fix = 0;
-                playerScoreBoardController.ResetScore();
             }
         }
     }
@@ -114,7 +133,6 @@ public class TriggerZoneController : MonoBehaviourPunCallbacks
                 targetScript.enabled = true;
                 targetScript2.enabled = true;
                 Debug.Log("Resetting score...");
-                playerScoreBoardController.ResetScore();
                 Debug.Log("Score after reset: " + playerScoreBoardController.GetScore());
                 count = 0;
             }

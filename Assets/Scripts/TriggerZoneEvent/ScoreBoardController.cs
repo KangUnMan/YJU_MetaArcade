@@ -18,6 +18,7 @@ public class ScoreBoardController : MonoBehaviourPunCallbacks
     public Text stopwatchText; // 스톱워치 시간 표시용 UI Text
     public GameObject but;
     private int score; // 현재 점수
+    public RandomObjectDisplay randomObjectDisplay; // RandomObjectDisplay 참조
 
     private void Start()
     {
@@ -42,8 +43,8 @@ public class ScoreBoardController : MonoBehaviourPunCallbacks
 
     public void ResetScore()
     {
-        score = 0;
         UpdateScoreText();
+        score = 0;
     }
 
     public int GetScore()
@@ -54,7 +55,7 @@ public class ScoreBoardController : MonoBehaviourPunCallbacks
     public void IncreaseScore(int value)
     {
         score += value;
-        UpdateScoreText();
+        UpdateScoreText(); // 점수 증가 후 UI 업데이트
         Debug.Log("Score: " + score);
     }
 
@@ -70,6 +71,7 @@ public class ScoreBoardController : MonoBehaviourPunCallbacks
     public void UpdateScoreText()
     {
         scoreText.text = "당신의 점수는: " + score + "점";
+        Debug.Log("UpdateScoreText called. Score: " + score);
     }
 
     public void UpdateStopwatchText(float elapsedTime)
@@ -87,10 +89,9 @@ public class ScoreBoardController : MonoBehaviourPunCallbacks
 
     public void StartGame()
     {
-        RandomObjectDisplay randomObjectDisplay = GetComponent<RandomObjectDisplay>();
         if (randomObjectDisplay != null)
         {
-            randomObjectDisplay.enabled = true;
+            randomObjectDisplay.SetActive(true);
         }
         else
         {
@@ -100,10 +101,9 @@ public class ScoreBoardController : MonoBehaviourPunCallbacks
 
     public void EndGame()
     {
-        RandomObjectDisplay randomObjectDisplay = GetComponent<RandomObjectDisplay>();
         if (randomObjectDisplay != null)
         {
-            randomObjectDisplay.enabled = false;
+            randomObjectDisplay.SetActive(false);
         }
         else
         {

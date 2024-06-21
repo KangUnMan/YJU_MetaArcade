@@ -15,7 +15,6 @@ public class Target : MonoBehaviour
 
     private void Start()
     {
-        // TriggerZoneController에서 ScoreBoardController를 설정하도록 수정
         canvasGroup.alpha = 0.0f;
     }
 
