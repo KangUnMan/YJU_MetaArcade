@@ -4744,6 +4744,7 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
+  PV: {fileID: 5250717249797724887}
   isAimMove: 0
 --- !u!114 &6095918525391672603
 MonoBehaviour:

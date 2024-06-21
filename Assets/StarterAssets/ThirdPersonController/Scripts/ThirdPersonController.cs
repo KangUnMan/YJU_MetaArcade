@@ -1,4 +1,5 @@
-﻿ using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -109,6 +110,7 @@ namespace StarterAssets
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
+        public PhotonView PV;
 
         private bool IsCurrentDeviceMouse
         {
@@ -169,11 +171,14 @@ namespace StarterAssets
 
         private void AssignAnimationIDs()
         {
-            _animIDSpeed = Animator.StringToHash("Speed");
-            _animIDGrounded = Animator.StringToHash("Grounded");
-            _animIDJump = Animator.StringToHash("Jump");
-            _animIDFreeFall = Animator.StringToHash("FreeFall");
-            _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+            if (PV.IsMine)
+            {
+                _animIDSpeed = Animator.StringToHash("Speed");
+                _animIDGrounded = Animator.StringToHash("Grounded");
+                _animIDJump = Animator.StringToHash("Jump");
+                _animIDFreeFall = Animator.StringToHash("FreeFall");
+                _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+            }
         }
 
         private void GroundedCheck()
