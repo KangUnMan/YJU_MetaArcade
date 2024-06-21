@@ -12,12 +12,10 @@ public class Player_Manager : MonoBehaviour
     private FirstPlayerController fpc;
     private Quaternion originalRotation;
     public GameObject Gun;
-
+    public PhotonView PV;
 
     [Header("Aim")]
     [SerializeField] private CinemachineVirtualCamera aimCam;
-    [SerializeField] private GameObject aimImage;
-    [SerializeField] private GameObject aimObj;
     [SerializeField] private Camera scopeCam;
     [SerializeField] private GameObject PlayerCam;
 
@@ -26,20 +24,26 @@ public class Player_Manager : MonoBehaviour
 
     void Start()
     {
-        input = GetComponent<StarterAssetsInputs>();
-        controller = GetComponent<ThirdPersonController>();
-        ani = GetComponent<Animator>();
-        fpc = GetComponent<FirstPlayerController>();
-        originalRotation = transform.rotation;
-        ani.SetLayerWeight(1, 0);
+        if (PV.IsMine)
+        {
+            input = GetComponent<StarterAssetsInputs>();
+            controller = GetComponent<ThirdPersonController>();
+            ani = GetComponent<Animator>();
+            fpc = GetComponent<FirstPlayerController>();
+            originalRotation = transform.rotation;
+            ani.SetLayerWeight(1, 0);
+        }
     }
 
     void Update()
     {
-        if (isInShootingZone)
+        if (PV.IsMine)
         {
+            if (isInShootingZone)
+            {
 
-            ScopeMode();
+                ScopeMode();
+            }
         }
     }
 

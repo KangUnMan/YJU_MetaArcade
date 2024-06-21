@@ -29,6 +29,12 @@ public class UI_Login : MonoBehaviour
         infoText.text = "";
     }
 
+    void Start()
+    {
+
+        Screen.SetResolution(1920, 1080, FullScreenMode.Windowed);
+    }
+
     void OnClickSignUp()
     {
         if (string.IsNullOrEmpty(loginText.text) || string.IsNullOrEmpty(passwordText.text))
