@@ -31,6 +31,7 @@ public class PlayershootManager : MonoBehaviour
 
     }
 
+
     [PunRPC]
     void Shoot()
     {
@@ -41,8 +42,7 @@ public class PlayershootManager : MonoBehaviour
         Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
         if (bulletRigidbody != null)
         {
-            // Rigidbody 컴포넌트가 있으면 총알에 힘을 가해 움직이게 함
-            bulletRigidbody.AddForce(firePoint.forward * bulletForce, ForceMode.Impulse);
+            bullet.GetComponent<PhotonView>().RPC("AddBulletForce", RpcTarget.All, firePoint.forward, bulletForce);
         }
         else
         {
