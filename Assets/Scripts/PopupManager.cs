@@ -6,7 +6,6 @@ public class PopupManager : MonoBehaviour
 {
     public GameObject popupPanel;
     public Button resumeButton;
-    public GameObject camera;
 
     void Start()
     {
@@ -37,7 +36,6 @@ public class PopupManager : MonoBehaviour
     {
         popupPanel.SetActive(true);
         Time.timeScale = 0; // 게임 일시 정지
-        camera.SetActive(false);
         Cursor.visible = true; // 커서 보이기
         Cursor.lockState = CursorLockMode.None;
     }
@@ -46,7 +44,6 @@ public class PopupManager : MonoBehaviour
     {
         popupPanel.SetActive(false);
         Time.timeScale = 1; // 게임 재개
-        camera.SetActive(true);
         Cursor.visible = false; // 커서 숨기기
         Cursor.lockState = CursorLockMode.Locked; // 커서 잠금
     }

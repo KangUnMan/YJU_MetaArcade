@@ -32,7 +32,6 @@ public class GameController : MonoBehaviour
     public bool BtnActive = false;
     private bool isCursorOverObject = false;
     public Text CountDownText;
-    public GameObject Gun;
     private RandomObjectDisplay _randomObjectDisplay;
     private Target _target;
     public TextMeshProUGUI a;
@@ -67,18 +66,7 @@ public class GameController : MonoBehaviour
             elapsedTime += Time.deltaTime;
             UpdateStopwatchText();
         }
-        /*if (isMouseLocked == false)
-        {
-            if (Input.GetMouseButtonDown(0)) // 좌클릭 입력
-            {
-                // 여기에 좌클릭 입력을 처리하는 코드를 추가합니다.
-            }
 
-            if (Input.GetMouseButtonDown(1)) // 우클릭 입력
-            {
-                // 여기에 우클릭 입력을 처리하는 코드를 추가합니다.
-            }
-        }*/
         {
             if (Input.GetMouseButton(1) && Input.GetMouseButtonDown(0))
             {
@@ -96,9 +84,7 @@ public class GameController : MonoBehaviour
                     {
                         
                         count = 0;
-                        //targetScript2.enabled = false;
                         targetScript.enabled = false;
-                        Gun.SetActive(false);
                         Popup.SetActive(true);
                         StopStopwatch();
                         EndGame();
@@ -121,19 +107,17 @@ public class GameController : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
+            PlayershootManager playerShootManager = other.GetComponent<PlayershootManager>();
+            targetScript = playerShootManager;
             scoretext();
             Reset();
             UpdateCounterText();
-            Gun.SetActive(true);
             StartCoroutine(StartGameAfterDelay(5.0f));
             BtnActive = true;
             b.SetActive(true);
             StartStopwatch();
             fix = 0;
             score = 0;
-            
-            
-            //but.SetActive(false);
 
 
         }
@@ -146,7 +130,6 @@ public class GameController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
 
-            Gun.SetActive(false);
             BtnActive = false;
             b.SetActive(false);
             ResetStopwatch(); // �����ġ �ʱ�ȭ
@@ -154,7 +137,6 @@ public class GameController : MonoBehaviour
             Reset();
             targetScript.enabled = true;
             targetScript2.enabled = true;
-            //bScript.ResetB();
             Debug.Log("Resetting score...");
             score = 0;
             Debug.Log("Score after reset: " + score);
@@ -166,15 +148,6 @@ public class GameController : MonoBehaviour
 
     private IEnumerator StartGameAfterDelay(float delay)
     {
-        //float remainingTime = delay;
-        //while (remainingTime > 0)
-        //{
-        //    CountDownText.text = remainingTime.ToString("F1"); // �Ҽ��� �� �ڸ����� ǥ��
-        //    yield return new WaitForSeconds(0.1f); // 0.1�ʸ��� ������Ʈ
-        //    remainingTime -= 0.1f;
-        //}
-
-        //CountDownText.text = "0";
         yield return new WaitForSeconds(delay);
         StartGame();
     }
@@ -274,32 +247,6 @@ public class GameController : MonoBehaviour
         //score = 0;
         Time.timeScale = 1;
     }
-    /* void OnMouseEnter()
-     {
-         isCursorOverObject = true;
-     }
-
-     // Ŀ���� ������Ʈ�� ��� �� ȣ��Ǵ� �Լ�
-     void OnMouseExit()
-     {
-         isCursorOverObject = false;
-     }
-     /*void OnGUI()
-     {
-         Event e = Event.current;
-         if (isCursorOverObject)
-         {
-             b.SetActive(true);
-             if (isCursorOverObject && e.isKey && e.keyCode == KeyCode.F)
-             {
-                 isFKeyPressed = true;
-             }
-         }
-         else
-         {
-             b.SetActive(false);
-         }
-     }*/
 
     public void SendMyScore()
     {

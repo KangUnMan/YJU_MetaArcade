@@ -90,7 +90,7 @@ public class UI_Login : MonoBehaviour
 
             if (res.LoginOk)
             {
-                PhotonNetwork.LoadLevel("ShootingRange");
+                PhotonNetwork.LoadLevel("MetaArcade");
             }
         });
         

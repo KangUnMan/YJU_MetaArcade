@@ -11,7 +11,7 @@ public class Player_Manager : MonoBehaviour
     private Animator ani;
     private FirstPlayerController fpc;
     private Quaternion originalRotation;
-    
+    public GameObject Gun;
 
 
     [Header("Aim")]
@@ -32,12 +32,6 @@ public class Player_Manager : MonoBehaviour
         fpc = GetComponent<FirstPlayerController>();
         originalRotation = transform.rotation;
         ani.SetLayerWeight(1, 0);
-
-
-        if (PhotonNetwork.IsConnectedAndReady)
-        {
-            PhotonNetwork.Instantiate(playerPrefab.name, Vector3.zero, Quaternion.identity);
-        }
     }
 
     void Update()
@@ -54,6 +48,7 @@ public class Player_Manager : MonoBehaviour
         if (other.CompareTag("ShootingZone"))
         {
             isInShootingZone = true;
+            Gun.SetActive(true);
         }
     }
 
@@ -62,6 +57,7 @@ public class Player_Manager : MonoBehaviour
         if (other.CompareTag("ShootingZone"))
         {
             isInShootingZone = false;
+            Gun.SetActive(false);
             // Exit 시 스코프 모드 해제
             DisableScopeMode();
         }
