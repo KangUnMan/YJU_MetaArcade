@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Target : MonoBehaviour
 {
@@ -8,20 +7,24 @@ public class Target : MonoBehaviour
     public int greenScore = 2;
     public int blueScore = 3;
     public CanvasGroup canvasGroup;
-    
-    private GameController _gameController;
+
+    private ScoreBoardController scoreBoardController;
     public float fadeDuration = 1.0f; // 페이드 인/아웃 지속 시간
     private bool isFadingIn = false;
     private bool isFadingOut = false;
 
     private void Start()
     {
-        // GameController 인스턴스를 가져옵니다.
-        _gameController = GameController.Instance;
+        // TriggerZoneController에서 ScoreBoardController를 설정하도록 수정
         canvasGroup.alpha = 0.0f;
     }
 
-    public void OnCollisionEnter(Collision collision)
+    public void SetScoreBoardController(ScoreBoardController controller)
+    {
+        scoreBoardController = controller;
+    }
+
+    private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("충돌이 감지되었습니다.");
         if (collision.gameObject.CompareTag("Bullet"))
@@ -32,39 +35,36 @@ public class Target : MonoBehaviour
             if (gameObject.CompareTag("Red"))
             {
                 score = redScore;
-                
                 StartCoroutine(FadeIn());
             }
-
             else if (gameObject.CompareTag("Green"))
             {
                 score = greenScore;
-                
                 StartCoroutine(FadeIn());
             }
-            else if (gameObject.CompareTag("Blue")) 
+            else if (gameObject.CompareTag("Blue"))
             {
                 Debug.Log("파랑");
                 score = blueScore;
-                
                 StartCoroutine(FadeIn());
             }
 
             // 점수를 증가시킴
-            if (_gameController != null)
+            if (scoreBoardController != null)
             {
-                _gameController.IncreaseScore(score);
+                scoreBoardController.IncreaseScore(score);
             }
             else
             {
-                Debug.LogError("GameController 인스턴스를 찾을 수 없습니다!");
+                Debug.LogError("ScoreBoardController 인스턴스를 찾을 수 없습니다!");
             }
 
             // 충돌한 총알 파괴
             Destroy(collision.gameObject);
         }
     }
-    public IEnumerator FadeIn()
+
+    private IEnumerator FadeIn()
     {
         isFadingIn = true;
         float elapsedTime = 0.0f;
@@ -86,7 +86,7 @@ public class Target : MonoBehaviour
         StartCoroutine(FadeOut());
     }
 
-    public IEnumerator FadeOut()
+    private IEnumerator FadeOut()
     {
         isFadingOut = true;
         float elapsedTime = 0.0f;
