@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -30,21 +31,13 @@ public class PlayershootManager : MonoBehaviour
 
     }
 
-    IEnumerator WaitAndPrint()
-    {
-        // 0.5초 동안 대기
-        yield return new WaitForSeconds(0.05f);
-
-    }
-
+    [PunRPC]
     void Shoot()
     {
         Vector3 spawnPosition = firePoint.position + new Vector3(0, -0.1f, 0);
         // 총알을 생성하고 발사 위치에 배치
-        GameObject bullet = Instantiate(bulletPrefab, spawnPosition, firePoint.rotation);
-        
-        StartCoroutine(WaitAndPrint());
-        // 발사 속도와 방향에 따라 총알을 전진시킴
+        GameObject bullet = PhotonNetwork.Instantiate(bulletPrefab.name, spawnPosition, firePoint.rotation);
+
         Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
         if (bulletRigidbody != null)
         {

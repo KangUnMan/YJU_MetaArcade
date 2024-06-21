@@ -1,24 +1,17 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
 
 public class Bullet : MonoBehaviourPunCallbacks // ÃÑ¾Ë ÆÄ±« ½ºÅ©¸³Æ®
 {
- 
-    private void Awake()
+    private void Start()
     {
-    }
-    void Start()
-    {
-        Destroy(gameObject, 2.5f);
+        StartCoroutine(DestroyAfterTime(0.9f)); // 2.5ÃÊ ÈÄ¿¡ ÆÄ±«
     }
 
-
-
-    void DestroyRPC()
+    private IEnumerator DestroyAfterTime(float time)
     {
+        yield return new WaitForSeconds(time);
         PhotonNetwork.Destroy(gameObject);
     }
 }

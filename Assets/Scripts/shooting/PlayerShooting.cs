@@ -37,4 +37,5 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
         Rigidbody bulletRB = bullet.GetComponent<Rigidbody>();
         bulletRB.velocity = direction * bulletSpeed;
     }
+
 }

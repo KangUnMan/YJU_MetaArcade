@@ -43,6 +43,8 @@ MonoBehaviour:
   - ShootBullet
   - OnTriggerEnter
   - OnTriggerExit
+  - Shoot
+  - DestroyRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
